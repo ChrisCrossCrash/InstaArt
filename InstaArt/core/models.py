@@ -1,3 +1,47 @@
 from django.db import models
 
-# Create your models here.
+
+class Artist(models.Model):
+    name = models.CharField(max_length=100)
+    biography = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Location(models.Model):
+    name = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    web_site_url = models.URLField(blank=True)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Style(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Piece(models.Model):
+    title = models.CharField(max_length=100)
+    artist = models.ForeignKey(Artist, on_delete=models.PROTECT)
+    location = models.ForeignKey(Location, null=True, on_delete=models.PROTECT)
+    styles = models.ManyToManyField(Style, blank=True)
+    description = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    wiki_url = models.URLField(blank=True)
+    # ImageFields require 'Pillow' to be installed
+    # You must also add a media url to the urlpatterns
+    image = models.ImageField(upload_to='art/piece_images/')
+
+    class Meta:
+        ordering = ['-created_date']
+
+    def __str__(self):
+        return self.title

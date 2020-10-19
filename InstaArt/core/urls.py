@@ -1,8 +1,15 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
-from InstaArt.core.views import say_hi
+from . import views
+
+router = routers.DefaultRouter()
+router.register(r'artists', views.ArtistViewSet)
+router.register(r'locations', views.LocationViewSet)
+router.register(r'styles', views.StyleViewSet)
+router.register(r'pieces', views.PieceViewSet)
 
 
 urlpatterns = [
-    path('', say_hi)
+    path('', include(router.urls)),
 ]
