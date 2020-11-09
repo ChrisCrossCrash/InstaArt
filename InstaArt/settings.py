@@ -45,12 +45,17 @@ INSTALLED_APPS = [
 
     # Third-party
     'rest_framework',
+    'corsheaders',
 
     # This project
     'InstaArt.core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
+    # For django-cors-headers
+    'corsheaders.middleware.CorsMiddleware',
+
+    # Defaults
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -142,3 +147,9 @@ MEDIA_URL = '/media/'
 
 # noinspection PyUnresolvedReferences
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+
+
+# django-cors-headers
+#  https://github.com/adamchainz/django-cors-headers
+
+CORS_ALLOW_ALL_ORIGINS = DEBUG
