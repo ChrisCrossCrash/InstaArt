@@ -149,7 +149,17 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 
+# Django REST Framework
+# https://www.django-rest-framework.org/api-guide/settings/
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
+}
+
+
 # django-cors-headers
-#  https://github.com/adamchainz/django-cors-headers
+# https://github.com/adamchainz/django-cors-headers
 
 CORS_ALLOW_ALL_ORIGINS = DEBUG
