@@ -25,3 +25,21 @@ class PieceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Piece
         fields = ['url', 'title', 'artist', 'location', 'styles', 'description', 'created_date', 'wiki_url', 'image']
+
+
+class InstaArtListSerializer(serializers.HyperlinkedModelSerializer):
+    artist = ArtistSerializer()
+    location = LocationSerializer()
+    styles = StyleSerializer(many=True)
+
+    class Meta:
+        model = Piece
+        fields = [
+            'title',
+            'artist',
+            'location',
+            'styles',
+            'description',
+            'wiki_url',
+            'image',
+        ]

@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions
 
 from .models import Artist, Location, Style, Piece
-from .serializers import ArtistSerializer, LocationSerializer, StyleSerializer, PieceSerializer
+from .serializers import ArtistSerializer, LocationSerializer, StyleSerializer, PieceSerializer, InstaArtListSerializer
 
 
 class ArtistViewSet(viewsets.ModelViewSet):
@@ -25,4 +25,10 @@ class StyleViewSet(viewsets.ModelViewSet):
 class PieceViewSet(viewsets.ModelViewSet):
     queryset = Piece.objects.all()
     serializer_class = PieceSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class InstaArtListViewSet(viewsets.ModelViewSet):
+    queryset = Piece.objects.all()
+    serializer_class = InstaArtListSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

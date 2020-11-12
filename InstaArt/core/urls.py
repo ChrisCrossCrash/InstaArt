@@ -8,6 +8,7 @@ router.register('artists', views.ArtistViewSet)
 router.register('locations', views.LocationViewSet)
 router.register('styles', views.StyleViewSet)
 router.register('pieces', views.PieceViewSet)
+router.register('insta', views.InstaArtListViewSet)
 
 
 urlpatterns = [
