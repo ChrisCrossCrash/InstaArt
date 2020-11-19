@@ -1,16 +1,13 @@
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
 
 from . import views
 
-router = routers.DefaultRouter()
-router.register('artists', views.ArtistViewSet)
-router.register('locations', views.LocationViewSet)
-router.register('styles', views.StyleViewSet)
-router.register('pieces', views.PieceViewSet)
-router.register('insta', views.InstaArtListViewSet)
-
-
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', views.InstaArt.as_view()),
+    path('api/artist/<int:pk>/', views.ArtistView.as_view()),
+    path('api/location/<int:pk>/', views.LocationView.as_view()),
+    path('api/style/<int:pk>/', views.StyleView.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'html'])

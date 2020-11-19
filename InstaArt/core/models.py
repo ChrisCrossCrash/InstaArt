@@ -38,7 +38,7 @@ class Piece(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     wiki_url = models.URLField(blank=True)
     # ImageFields require 'Pillow' to be installed
-    # You must also add a media url to the urlpatterns
+    # A media url is also required in urlpatterns for serving files in development
     image = models.ImageField(upload_to='art/piece_images/')
 
     class Meta:

@@ -3,31 +3,25 @@ from InstaArt.core.models import Artist, Location, Style, Piece
 from rest_framework import serializers
 
 
-class ArtistSerializer(serializers.HyperlinkedModelSerializer):
+class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
-        fields = ['url', 'name', 'biography']
+        fields = ['name', 'pk']
 
 
-class LocationSerializer(serializers.HyperlinkedModelSerializer):
+class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ['url', 'name', 'city', 'country', 'web_site_url', 'description']
+        fields = ['name', 'pk']
 
 
-class StyleSerializer(serializers.HyperlinkedModelSerializer):
+class StyleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Style
-        fields = ['url', 'name', 'description']
+        fields = ['name', 'pk']
 
 
-class PieceSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Piece
-        fields = ['url', 'title', 'artist', 'location', 'styles', 'description', 'created_date', 'wiki_url', 'image']
-
-
-class InstaArtListSerializer(serializers.HyperlinkedModelSerializer):
+class InstaArtSerializer(serializers.ModelSerializer):
     artist = ArtistSerializer()
     location = LocationSerializer()
     styles = StyleSerializer(many=True)

@@ -1,34 +1,42 @@
-from rest_framework import viewsets, permissions
+from django.shortcuts import get_list_or_404
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from .models import Artist, Location, Style, Piece
-from .serializers import ArtistSerializer, LocationSerializer, StyleSerializer, PieceSerializer, InstaArtListSerializer
-
-
-class ArtistViewSet(viewsets.ModelViewSet):
-    queryset = Artist.objects.all()
-    serializer_class = ArtistSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+from .models import Piece
+from .serializers import InstaArtSerializer
 
 
-class LocationViewSet(viewsets.ModelViewSet):
-    queryset = Location.objects.all()
-    serializer_class = LocationSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+class InstaArt(APIView):
+    # noinspection PyUnusedLocal
+    @staticmethod
+    def get(request, format=None):
+        pieces = Piece.objects.all()
+        serializer = InstaArtSerializer(pieces, many=True)
+        return Response(serializer.data)
 
 
-class StyleViewSet(viewsets.ModelViewSet):
-    queryset = Style.objects.all()
-    serializer_class = StyleSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+class ArtistView(APIView):
+    # noinspection PyUnusedLocal
+    @staticmethod
+    def get(request, pk, format=None):
+        pieces = get_list_or_404(Piece, artist=pk)
+        serializer = InstaArtSerializer(pieces, many=True)
+        return Response(serializer.data)
 
 
-class PieceViewSet(viewsets.ModelViewSet):
-    queryset = Piece.objects.all()
-    serializer_class = PieceSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+class LocationView(APIView):
+    # noinspection PyUnusedLocal
+    @staticmethod
+    def get(request, pk, format=None):
+        pieces = get_list_or_404(Piece, location=pk)
+        serializer = InstaArtSerializer(pieces, many=True)
+        return Response(serializer.data)
 
 
-class InstaArtListViewSet(viewsets.ModelViewSet):
-    queryset = Piece.objects.all()
-    serializer_class = InstaArtListSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+class StyleView(APIView):
+    # noinspection PyUnusedLocal
+    @staticmethod
+    def get(request, pk, format=None):
+        pieces = get_list_or_404(Piece, styles=pk)
+        serializer = InstaArtSerializer(pieces, many=True)
+        return Response(serializer.data)
