@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'ckeditor',
 
     # This project
-    'InstaArt.core.apps.CoreConfig',
+    'art.apps.ArtConfig',
 ]
 
 MIDDLEWARE = [

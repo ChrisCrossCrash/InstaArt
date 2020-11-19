@@ -1,4 +1,4 @@
-from InstaArt.core.models import Artist, Location, Style, Piece
+from .models import Artist, Location, Style, Piece
 
 from rest_framework import serializers
 
